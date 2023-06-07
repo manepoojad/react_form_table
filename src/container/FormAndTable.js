@@ -74,8 +74,23 @@ function FormAndTable() {
 
 
         })
+        
 
     }
+    const  handleRemoveItem=(clickItemIndex)=>{
+         const newArr=studentList.filter((item,indx)=>{
+            if(clickItemIndex==indx){
+                return false
+                
+            }
+            else{
+                return true
+            }
+         })
+         console.log(newArr)
+         setStudentList(newArr)
+    }
+
     return (
         <div className="App">
             <h2>Update Student Data</h2>
@@ -199,6 +214,7 @@ function FormAndTable() {
                                 <th>KnownLanguages</th>
                                 <th>Address</th>
                                 <th>Course</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -213,6 +229,10 @@ function FormAndTable() {
                                         <td>{item.knownLanguages}</td>
                                         <td>{item.address}</td>
                                         <td>{item.course}</td>
+                                        <td>
+                                            <button type='button' onClick={(e)=>handleRemoveItem(index)}>Remove</button>
+                                       
+                                        </td>
                                     </tr>
                                 ))
                             }
