@@ -59,8 +59,10 @@ function FormAndTable() {
         debugger
 
         console.log(formData)
+        const newFormData = { ...formData, isActive: true }
+
         const newStudentList = [...studentList]
-        newStudentList.push(formData)
+        newStudentList.push(newFormData)
         setStudentList(newStudentList)
         console.log(newStudentList)
         setFormData({
@@ -89,6 +91,21 @@ function FormAndTable() {
         })
         console.log(newArr)
         setStudentList(newArr)
+    }
+
+    const handleDeactivateItem = (clickItemIndex) => {
+        const newArr = studentList.map((item, index) => {
+            if (index == clickItemIndex) {
+                const newItem = { ...item, isActive: false }
+                return newItem
+            }
+            else {
+                return item
+            }
+        })
+        console.log(newArr)
+        setStudentList(newArr)
+
     }
 
     return (
@@ -219,22 +236,27 @@ function FormAndTable() {
                         </thead>
                         <tbody>
                             {
-                                studentList.map((item, index) => (
-                                    <tr key={index}>
-                                        <td> {index + 1} </td>
-                                        <td>{item.firstName}</td>
-                                        <td> {item.lastName} </td>
-                                        <td>{item.dateOfBirth}</td>
-                                        <td>{item.gender}</td>
-                                        <td>{item.knownLanguages}</td>
-                                        <td>{item.address}</td>
-                                        <td>{item.course}</td>
-                                        <td>
-                                            <button type='button' onClick={(e) => handleRemoveItem(index)}>Remove</button>
+                                studentList.map((item, index) => {
+                                    if (item.isActive == true) {
+                                        return (
+                                            <tr key={index}>
+                                                <td> {index + 1} </td>
+                                                <td>{item.firstName}</td>
+                                                <td> {item.lastName} </td>
+                                                <td>{item.dateOfBirth}</td>
+                                                <td>{item.gender}</td>
+                                                <td>{item.knownLanguages}</td>
+                                                <td>{item.address}</td>
+                                                <td>{item.course}</td>
+                                                <td>
+                                                    <button type='button' onClick={(e) => handleRemoveItem(index)}>Remove</button>
+                                                    <button type='button' onClick={(e) => handleDeactivateItem(index)}>Deactive</button>
 
-                                        </td>
-                                    </tr>
-                                ))
+                                                </td>
+                                            </tr>
+                                        )
+                                    }
+                                })
                             }
                         </tbody>
                     </Table>

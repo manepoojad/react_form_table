@@ -11,9 +11,9 @@ function App() {
 
     return (
         <div className="App">
-           <Routing/>
+           {/* <Routing/> */}
             {/* <Practice/> */}
-            {/* <FormAndTable/> */}
+            <FormAndTable/>
         </div>
 
 
