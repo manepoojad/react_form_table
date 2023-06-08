@@ -18,11 +18,11 @@ console.log(fullname)
 * replace "test" with "Bharat"
 * replace "is" with "Pooja" 
 */
-const raplaceSubstringFromString=()=>{
+const raplaceSubstringFromString = () => {
     const testString = "This is test string from test language. test word is important"
-let result=testString.replaceAll("test","Bharat")
-// let result=testString.replace("test","Bharat")
-   let result1=testString.replace(" is"," Pooja")
+    let result = testString.replaceAll("test", "Bharat")
+    // let result=testString.replace("test","Bharat")
+    let result1 = testString.replace(" is", " Pooja")
     console.log(result)
     console.log(result1)
 }
@@ -44,7 +44,7 @@ const isItoddEvenNumber = (number) => {
         return ('Odd Number')
     }
 }
-const isOddOrEven= isItoddEvenNumber(2)
+const isOddOrEven = isItoddEvenNumber(2)
 console.log(isOddOrEven)
 
 
@@ -58,9 +58,9 @@ const table = () => {
         console.log(i)
     }
     // OR 
-    let number=17
-    for(let i=1;i<=10;i++){
-        const result =number*i
+    let number = 17
+    for (let i = 1; i <= 10; i++) {
+        const result = number * i
         console.log(result)
     }
 }
@@ -73,13 +73,13 @@ table()
 * function logic to remove index 5 item from array.
 * const testList= [ 10, 15, 40, 8,20,35 ,45]
 */
-const removeSpecificIndexItemFromArray=()=>{
-    const testList= [ 10, 15, 40, 8,20,35 ,45]
-    const arr=testList.filter((item,index)=>{
-       return index!=5
-       
+const removeSpecificIndexItemFromArray = () => {
+    const testList = [10, 15, 40, 8, 20, 35, 45]
+    const arr = testList.filter((item, index) => {
+        return index != 5
+
     })
-       console.log(arr)
+    console.log(arr)
 }
 removeSpecificIndexItemFromArray()
 
@@ -90,10 +90,10 @@ removeSpecificIndexItemFromArray()
 * function logic to filter number from array which is less than 20
 * const testList= [ 10, 15, 40, 8,20,35 ,45]
 */
-const filterNumberFromArray=()=>{
-    const testList= [ 10, 15, 40, 8, 45,null]
-    let lessThanTwenty=testList.filter((number)=>{
-        if(number>=20){
+const filterNumberFromArray = () => {
+    const testList = [10, 15, 40, 8, 45, null]
+    let lessThanTwenty = testList.filter((number) => {
+        if (number >= 20) {
             return true
         }
         // else{
@@ -106,7 +106,7 @@ const filterNumberFromArray=()=>{
 
     })
     console.log(lessThanTwenty)
-    
+
 }
 
 filterNumberFromArray()
@@ -124,27 +124,27 @@ filterNumberFromArray()
                        {id:10,firstName:"Kajal",lastName:"Jadhav"},
    ] 
  */
-   const removeObjectWithId=(studentList,id)=>{
-    const temArray=studentList.filter((obj)=>{
-        if(obj.id==4){
-          return false
+const removeObjectWithId = (studentList, id) => {
+    const temArray = studentList.filter((obj) => {
+        if (obj.id == 4) {
+            return false
         }
-        else{
-         return true
+        else {
+            return true
         }
 
-    } )
-    
-     return temArray
- }
- const studentList=[
-     {id:1,firstName:"Pooja",lastName:"Mane"},
-     {id:2,firstName:"Geeta",lastName:"Sonwane"},
-     {id:3,firstName:"Neha",lastName:"Yadav"},
-     {id:4,firstName:"Sarita",lastName:"Patil"},
-     {id:10,firstName:"Kajal",lastName:"Jadhav"},
-] 
-const newArr=removeObjectWithId(studentList,4)
+    })
+
+    return temArray
+}
+const studentList = [
+    { id: 1, firstName: "Pooja", lastName: "Mane" },
+    { id: 2, firstName: "Geeta", lastName: "Sonwane" },
+    { id: 3, firstName: "Neha", lastName: "Yadav" },
+    { id: 4, firstName: "Sarita", lastName: "Patil" },
+    { id: 10, firstName: "Kajal", lastName: "Jadhav" },
+]
+const newArr = removeObjectWithId(studentList, 4)
 console.log(newArr)
 
 
@@ -155,7 +155,7 @@ console.log(newArr)
  * @description 
  * write a logic which add 2 in each item & create a new array and print it.(use map method)
  */
-const addTwoInEachItemOfArray=()=>{
+const addTwoInEachItemOfArray = () => {
     const number = [1, 2, 3, 4]
     const newArr = number.map((number) => {
         const result = number + 2
@@ -168,13 +168,13 @@ const addTwoInEachItemOfArray=()=>{
 addTwoInEachItemOfArray()
 
 
-  
+
 /**
  * @description 
  * Write a function which takes argument/parameter as array of 
    number and add 2 in each item & return new array & print it (use map method)
  */
-   const takeArgumentAsArrayAndAdd2InEachItem = (listOfNumber) => {
+const takeArgumentAsArrayAndAdd2InEachItem = (listOfNumber) => {
     const newArr = listOfNumber.map((number) => {
         const result = number + 2
         return result
@@ -238,19 +238,19 @@ const testObject = {
    lastName: "Mane"
 }
  */
-const getObjectKeyAndValues=()=>{
+const getObjectKeyAndValues = () => {
     const testObject = {
         firstName: "Pooja",
         middleName: "Devidas",
         lastName: "Mane"
-}
-// const value=testObject["firstName"]
-for(let key in testObject){
-  let text =testObject[key] 
-  console.log(key)
-    console.log(text)
-}
-console.log(value)
+    }
+    // const value=testObject["firstName"]
+    for (let key in testObject) {
+        let text = testObject[key]
+        console.log(key)
+        console.log(text)
+    }
+    console.log(value)
 
 }
 getObjectKeyAndValues()

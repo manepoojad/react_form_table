@@ -2,6 +2,28 @@
   text-align: center;
 }
 
+.navbar{
+  text-align: right;
+}
+
+.navbar li{
+  display: inline-block;
+  padding: 10px 5px;
+}
+
+.nav-bar-link{
+  color: black;
+  text-decoration: none;
+}
+
+.nav-bar-link:hover{
+  color: red;
+}
+
+.navbar .active{
+  color: chartreuse;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

@@ -74,21 +74,21 @@ function FormAndTable() {
 
 
         })
-        
+
 
     }
-    const  handleRemoveItem=(clickItemIndex)=>{
-         const newArr=studentList.filter((item,indx)=>{
-            if(clickItemIndex==indx){
+    const handleRemoveItem = (clickItemIndex) => {
+        const newArr = studentList.filter((item, indx) => {
+            if (clickItemIndex == indx) {
                 return false
-                
+
             }
-            else{
+            else {
                 return true
             }
-         })
-         console.log(newArr)
-         setStudentList(newArr)
+        })
+        console.log(newArr)
+        setStudentList(newArr)
     }
 
     return (
@@ -230,8 +230,8 @@ function FormAndTable() {
                                         <td>{item.address}</td>
                                         <td>{item.course}</td>
                                         <td>
-                                            <button type='button' onClick={(e)=>handleRemoveItem(index)}>Remove</button>
-                                       
+                                            <button type='button' onClick={(e) => handleRemoveItem(index)}>Remove</button>
+
                                         </td>
                                     </tr>
                                 ))
