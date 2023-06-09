@@ -94,20 +94,35 @@ function FormAndTable() {
     }
 
     const handleDeactivateItem = (clickItemIndex) => {
-        const newArr = studentList.map((item, index) => {
+
+
+        // const newArr = studentList.map((item, index) => {
+        //     if (index == clickItemIndex) {
+        //         const newItem = { ...item, isActive: false }
+        //         return newItem
+        //     }
+        //     else {
+        //         return item
+        //     }
+        // }) 
+        // console.log(newArr)
+        // setStudentList(newArr)
+
+        const newArr = []
+        studentList.forEach((item, index) => {
             if (index == clickItemIndex) {
                 const newItem = { ...item, isActive: false }
-                return newItem
+                newArr.push(newItem)
             }
             else {
-                return item
+                newArr.push(item)
             }
         })
         console.log(newArr)
         setStudentList(newArr)
 
     }
-
+      console.log(studentList)
     return (
         <div className="App">
             <h2>Update Student Data</h2>
