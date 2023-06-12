@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import FormAndTable from './container/FormAndTable';
 import Practice from './container/Practice';
 import Routing from './container/Routing';
+import Apifetch from './container/Apifetch';
 
 function App() {
 
@@ -13,7 +14,9 @@ function App() {
         <div className="App">
            {/* <Routing/> */}
             {/* <Practice/> */}
-            <FormAndTable/>
+
+            <Apifetch/>
+            {/* <FormAndTable/> */}
         </div>
 
 
