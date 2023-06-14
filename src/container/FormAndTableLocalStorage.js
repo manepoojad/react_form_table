@@ -1,12 +1,7 @@
-import React, { useState } from 'react'
-// import './App.css'
-import '../App.css'
+import { useEffect, useState } from "react"
 import { Table } from 'react-bootstrap'
 
-
-
-function FormAndTable() {
-
+function FormAndTableLocalStorage() {
     const [studentList, setStudentList] = useState([])
     const [formData, setFormData] = useState({
         firstName: "",
@@ -18,6 +13,17 @@ function FormAndTable() {
         course: ""
 
     })
+
+    useEffect(() => {
+        //   debugger
+        const getStringifyStudentDataFromLocalStorage = localStorage.getItem('studentInfo')
+        const getParesdStringifyStudentDataFromLocalStorage = JSON.parse(getStringifyStudentDataFromLocalStorage)
+
+        if (getParesdStringifyStudentDataFromLocalStorage) {
+            console.log('condition passss')
+            setStudentList(getParesdStringifyStudentDataFromLocalStorage)
+        }
+    }, [])
 
     const handleInputChange = (e) => {
 
@@ -49,22 +55,30 @@ function FormAndTable() {
             })
         }
 
-
-
-
     }
 
-
     const formSubmit = () => {
-        debugger
+        const stringifyStudentData = localStorage.getItem('studentInfo')
+        let parsedStudentData = JSON.parse(stringifyStudentData)
 
-        console.log(formData)
-        const newFormData = { ...formData, isActive: true }
+        if (stringifyStudentData) {
+            console.log('if condition')
+        }
+        else {
+            parsedStudentData = []
+        }
 
-        const newStudentList = [...studentList]
-        newStudentList.push(newFormData)
-        setStudentList(newStudentList)
-        console.log(newStudentList)
+        parsedStudentData.push(formData)
+
+        const newStringifyStudentData = JSON.stringify(parsedStudentData)
+        localStorage.setItem('studentInfo', newStringifyStudentData)
+
+        const getStringifyStudentData = localStorage.getItem('studentInfo')
+        const getParsedStudentData = JSON.parse(getStringifyStudentData)
+        setStudentList(getParsedStudentData)
+
+
+
         setFormData({
             firstName: "",
             lastName: "",
@@ -73,59 +87,14 @@ function FormAndTable() {
             knownLanguages: [],
             address: "",
             course: ""
-
-
         })
 
 
     }
-    const handleRemoveItem = (clickItemIndex) => {
-        const newArr = studentList.filter((item, indx) => {
-            if (clickItemIndex == indx) {
-                return false
-
-            }
-            else {
-                return true
-            }
-        })
-        console.log(newArr)
-        setStudentList(newArr)
-    }
-
-    const handleDeactivateItem = (clickItemIndex) => {
 
 
-        // const newArr = studentList.map((item, index) => {
-        //     if (index == clickItemIndex) {
-        //         const newItem = { ...item, isActive: false }
-        //         return newItem
-        //     }
-        //     else {
-        //         return item
-        //     }
-        // }) 
-        // console.log(newArr)
-        // setStudentList(newArr)
-
-        const newArr = []
-        studentList.forEach((item, index) => {
-            if (index == clickItemIndex) {
-                const newItem = { ...item, isActive: false }
-                newArr.push(newItem)
-            }
-            else {
-                newArr.push(item)
-            }
-        })
-        console.log(newArr)
-        setStudentList(newArr)
-
-    }
-    console.log(studentList)
     return (
-        <div className="App">
-            <h2>Update Student Data</h2>
+        <div>
             <form>
                 <div>
                     <label>First name:</label>
@@ -254,8 +223,8 @@ function FormAndTable() {
                 </thead>
                 <tbody>
                     {
-                        studentList.map((item, index) => {
-                            if (item.isActive == true) {
+                        studentList && studentList.map((item, index) => {
+                            {
                                 return (
                                     <tr key={index}>
                                         <td> {index + 1} </td>
@@ -266,11 +235,8 @@ function FormAndTable() {
                                         <td>{item.knownLanguages}</td>
                                         <td>{item.address}</td>
                                         <td>{item.course}</td>
-                                        <td>
-                                            <button type='button' onClick={(e) => handleRemoveItem(index)}>Remove</button>
-                                            <button type='button' onClick={(e) => handleDeactivateItem(index)}>Deactive</button>
+                                        <td>{}</td>
 
-                                        </td>
                                     </tr>
                                 )
                             }
@@ -278,11 +244,8 @@ function FormAndTable() {
                     }
                 </tbody>
             </Table>
+
         </div>
-
-
-    );
-
+    )
 }
-
-export default FormAndTable
+export default FormAndTableLocalStorage

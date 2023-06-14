@@ -1,33 +1,23 @@
 import { useEffect, useState } from "react"
+import { Table } from "react-bootstrap"
 
 function Apifetch() {
-    console.log("execution order 1")
     const [dataList, setDataList] = useState([])
 
     useEffect(() => {
-        test()
-        console.log("execution order 5")
         getJsonPlaceholderData()
     }, [])
 
     const getJsonPlaceholderData = async () => {
-        console.log("execution order 6")
         const response = await fetch('https://jsonplaceholder.typicode.com/posts')
         const responseDataList = await response.json()
         setDataList(responseDataList)
     }
-    const test=()=>{
-        console.log("execution order 4")
-    }
     
-
-    // console.log(dataList)
-    console.log("execution order 2")
     return (
         <div>
-            { console.log("execution order 3")}
             <h1>API Fetch Call Page</h1>
-            <table>
+            <Table varient="dark" striped>
                 <thead>
                     <tr>
                         <th>UserId</th>
@@ -53,7 +43,7 @@ function Apifetch() {
                         )
                     }
                 </tbody>
-            </table>
+            </Table>
 
 
 
