@@ -3,6 +3,7 @@ import { Table } from 'react-bootstrap'
 
 function FormAndTableLocalStorage() {
     const [studentList, setStudentList] = useState([])
+    const [editStudentIndex, setEditStudentIndex] = useState(null)
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
@@ -92,6 +93,91 @@ function FormAndTableLocalStorage() {
 
     }
 
+    const handleDeleteStudentData = (clickItemIndex) => {
+        /**
+        * get data from localstorage
+        * parsed that data
+        * using filter  get item one by one to remove that item and get new filtered arr
+        * update studentlist state with filtered arr
+        * update localstorage with filtered arr
+        */
+
+        const getStringifyStudentData = localStorage.getItem('studentInfo')
+        const getParesdStudentDataFromLocalStorage = JSON.parse(getStringifyStudentData)
+        console.log(getParesdStudentDataFromLocalStorage)
+        const newArr = getParesdStudentDataFromLocalStorage.filter((item, index) => {
+            if (index == clickItemIndex) {
+                return false
+            }
+            else {
+                return true
+            }
+
+        })
+        console.log(newArr)
+
+        setStudentList(newArr)
+
+        const newArrStringifyData = JSON.stringify(newArr)
+        localStorage.setItem('studentInfo', newArrStringifyData)
+
+
+    }
+
+    const handleEditStudentData = (item, clickItemIndex) => {
+        console.log(item, clickItemIndex)
+        /**
+         * get student data as function parameter 
+         * update form data state using item[keyname]
+         */
+
+        setEditStudentIndex(clickItemIndex)  //IMP
+
+        setFormData({
+            firstName: item.firstName,
+            lastName: item.lastName,
+            dateOfBirth: item.dateOfBirth,
+            gender: item.gender,
+            knownLanguages: item.knownLanguages,
+            address: item.address,
+            course: item.course
+
+
+        })
+
+    }
+
+    const updateStudentFormData = () => {
+        /**
+         * get formdata from state 
+         * afterthat get studentlist from the state 
+         * replace student item with form data in student list by using index
+         */
+        const newArr = studentList.map((item, index) => {
+            if (index == editStudentIndex) {
+                return formData
+            }
+            else {
+                return item
+            }
+        })
+        console.log(newArr)
+        setStudentList(newArr)
+
+        const newArrStringifyData = JSON.stringify(newArr)
+        localStorage.setItem('studentInfo', newArrStringifyData)
+
+        setFormData({
+            firstName: "",
+            lastName: "",
+            dateOfBirth: "",
+            gender: "",
+            knownLanguages: [],
+            address: "",
+            course: ""
+        })
+    }
+
 
     return (
         <div>
@@ -160,7 +246,7 @@ function FormAndTableLocalStorage() {
                         type="checkbox"
                         name="knownLanguages"
                         value="english"
-                        checked={formData.knownLanguages.includes("english")}
+                        checked={formData.knownLanguages && formData.knownLanguages.includes("english")}
                         onChange={e => handleInputChange(e)}
                     />
                     <label>Marathi</label>
@@ -168,14 +254,14 @@ function FormAndTableLocalStorage() {
                         type="checkbox"
                         name="knownLanguages"
                         value="marathi"
-                        checked={formData.knownLanguages.includes("marathi")}
+                        checked={formData.knownLanguages && formData.knownLanguages.includes("marathi")}
                         onChange={e => handleInputChange(e)} />
                     <label>Hindi</label>
                     <input
                         type="checkbox"
                         name="knownLanguages"
                         value="hindi"
-                        checked={formData.knownLanguages.includes("hindi")}
+                        checked={formData.knownLanguages && formData.knownLanguages.includes("hindi")}
                         onChange={e => handleInputChange(e)}
                     />
                 </div>
@@ -201,9 +287,11 @@ function FormAndTableLocalStorage() {
                     </select><br />
                 </div>
                 <div>
-                    <button type='button' onClick={formSubmit}>
+                    <button type='button' onClick={() => formSubmit()}>
                         Submit
                     </button>
+
+                    <button type="button" onClick={() => updateStudentFormData()}>Update</button>
 
                 </div>
             </form>
@@ -235,7 +323,10 @@ function FormAndTableLocalStorage() {
                                         <td>{item.knownLanguages}</td>
                                         <td>{item.address}</td>
                                         <td>{item.course}</td>
-                                        <td>{}</td>
+                                        <td>
+                                            <button type="button" onClick={() => handleDeleteStudentData(index)} >Delete</button>
+                                            <button type="button" onClick={() => handleEditStudentData(item, index)}>Edit</button>
+                                        </td>
 
                                     </tr>
                                 )
