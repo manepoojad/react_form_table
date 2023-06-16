@@ -104,7 +104,6 @@ function FormAndTableLocalStorage() {
 
         const getStringifyStudentData = localStorage.getItem('studentInfo')
         const getParesdStudentDataFromLocalStorage = JSON.parse(getStringifyStudentData)
-        console.log(getParesdStudentDataFromLocalStorage)
         const newArr = getParesdStudentDataFromLocalStorage.filter((item, index) => {
             if (index == clickItemIndex) {
                 return false
@@ -114,7 +113,6 @@ function FormAndTableLocalStorage() {
             }
 
         })
-        console.log(newArr)
 
         setStudentList(newArr)
 
@@ -125,7 +123,6 @@ function FormAndTableLocalStorage() {
     }
 
     const handleEditStudentData = (item, clickItemIndex) => {
-        console.log(item, clickItemIndex)
         /**
          * get student data as function parameter 
          * update form data state using item[keyname]
@@ -167,6 +164,7 @@ function FormAndTableLocalStorage() {
         const newArrStringifyData = JSON.stringify(newArr)
         localStorage.setItem('studentInfo', newArrStringifyData)
 
+        setEditStudentIndex(null)
         setFormData({
             firstName: "",
             lastName: "",
@@ -287,12 +285,12 @@ function FormAndTableLocalStorage() {
                     </select><br />
                 </div>
                 <div>
-                    <button type='button' onClick={() => formSubmit()}>
-                        Submit
-                    </button>
-
-                    <button type="button" onClick={() => updateStudentFormData()}>Update</button>
-
+                    {
+                        editStudentIndex == null ?
+                            <button type='button' onClick={() => formSubmit()}>Submit</button>
+                            :
+                            <button type="button" onClick={() => updateStudentFormData()}>Update</button>
+                    }
                 </div>
             </form>
             <Table variant='dark' striped>
