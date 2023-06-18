@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react"
-import { Table } from 'react-bootstrap'
+import { useEffect, useState, } from "react"
+import { Table } from "react-bootstrap"
 
-function FormAndTableLocalStorage() {
-    const [studentList, setStudentList] = useState([])
+function FormAndTableAPI() {
     const [editStudentIndex, setEditStudentIndex] = useState(null)
+    const [studentList, setStudentList] = useState([])
+
     const [formData, setFormData] = useState({
-        firstName: "",
+        firstName: "Pooja",
         lastName: "",
         dateOfBirth: "",
         gender: "",
@@ -16,14 +17,7 @@ function FormAndTableLocalStorage() {
     })
 
     useEffect(() => {
-        //   debugger
-        const getStringifyStudentDataFromLocalStorage = localStorage.getItem('studentInfo')
-        const getParesdStringifyStudentDataFromLocalStorage = JSON.parse(getStringifyStudentDataFromLocalStorage)
-
-        if (getParesdStringifyStudentDataFromLocalStorage) {
-            console.log('condition passss')
-            setStudentList(getParesdStringifyStudentDataFromLocalStorage)
-        }
+        getStudentList()
     }, [])
 
     const handleInputChange = (e) => {
@@ -58,28 +52,16 @@ function FormAndTableLocalStorage() {
 
     }
 
-    const formSubmit = () => {
-        const stringifyStudentData = localStorage.getItem('studentInfo')
-        let parsedStudentData = JSON.parse(stringifyStudentData)
+    const formSubmit = async () => {
 
-        if (stringifyStudentData) {
-            console.log('if condition')
-        }
-        else {
-            parsedStudentData = []
-        }
-
-        parsedStudentData.push(formData)
-
-        const newStringifyStudentData = JSON.stringify(parsedStudentData)
-        localStorage.setItem('studentInfo', newStringifyStudentData)
-
-        const getStringifyStudentData = localStorage.getItem('studentInfo')
-        const getParsedStudentData = JSON.parse(getStringifyStudentData)
-        setStudentList(getParsedStudentData)
-
-
-
+        const response = await fetch('http://localhost:8888/student', {
+            method: "POST",
+            body: JSON.stringify(formData),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        const responseData = await response.json()
         setFormData({
             firstName: "",
             lastName: "",
@@ -89,82 +71,39 @@ function FormAndTableLocalStorage() {
             address: "",
             course: ""
         })
+        getStudentList()
 
 
     }
 
-    const handleDeleteStudentData = (clickItemIndex) => {
+    const getStudentList = async () => {
         /**
-        * get data from localstorage
-        * parsed that data
-        * using filter  get item one by one to remove that item and get new filtered arr
-        * update studentlist state with filtered arr
-        * update localstorage with filtered arr
-        */
-
-        const getStringifyStudentData = localStorage.getItem('studentInfo')
-        const getParesdStudentDataFromLocalStorage = JSON.parse(getStringifyStudentData)
-        const newArr = getParesdStudentDataFromLocalStorage.filter((item, index) => {
-            if (index == clickItemIndex) {
-                return false
-            }
-            else {
-                return true
-            }
-
-        })
-
-        setStudentList(newArr)
-
-        const newArrStringifyData = JSON.stringify(newArr)
-        localStorage.setItem('studentInfo', newArrStringifyData)
-
-
-    }
-
-    const handleEditStudentData = (item, clickItemIndex) => {
-        /**
-         * get student data as function parameter 
-         * update form data state using item[keyname]
+         * get data from backend by using GET api method
+         * 
          */
-
-        setEditStudentIndex(clickItemIndex)  //IMP
-
-        setFormData({
-            firstName: item.firstName,
-            lastName: item.lastName,
-            dateOfBirth: item.dateOfBirth,
-            gender: item.gender,
-            knownLanguages: item.knownLanguages,
-            address: item.address,
-            course: item.course
-
-
+        const response = await fetch('http://localhost:8888/student', {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
         })
+        const responseData = await response.json()
+        setStudentList(responseData)
 
     }
 
-    const updateStudentFormData = () => {
-        /**
-         * get formdata from state 
-         * afterthat get studentlist from the state 
-         * replace student item with form data in student list by using index
-         */
-        const newArr = studentList.map((item, index) => {
-            if (index == editStudentIndex) {
-                return formData
-            }
-            else {
-                return item
+
+
+
+    const updateStudentFormData = async () => {
+        const response = await fetch('http://localhost:8888/student', {
+            method: "PUT",
+            body: JSON.stringify(formData),
+            headers: {
+                "Content-Type": "application/json"
             }
         })
-        console.log(newArr)
-        setStudentList(newArr)
-
-        const newArrStringifyData = JSON.stringify(newArr)
-        localStorage.setItem('studentInfo', newArrStringifyData)
-
-        setEditStudentIndex(null)
+        const responseData = await response.json()
         setFormData({
             firstName: "",
             lastName: "",
@@ -174,8 +113,26 @@ function FormAndTableLocalStorage() {
             address: "",
             course: ""
         })
+        getStudentList()
     }
 
+    const handleDeleteStudentData = async (studentId) => {
+        console.log('delete function called')
+        const response = await fetch(`http://localhost:8888/student/${studentId}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        const responseData = await response.json()
+        getStudentList()
+
+    }
+
+    const handleEditStudentData = (studentInfo) => {
+        setFormData(studentInfo)
+
+    }
 
     return (
         <div>
@@ -286,10 +243,10 @@ function FormAndTableLocalStorage() {
                 </div>
                 <div>
                     {
-                        editStudentIndex == null ?
-                            <button type='button' onClick={() => formSubmit()}>Submit</button>
-                            :
+                        formData.id ?
                             <button type="button" onClick={() => updateStudentFormData()}>Update</button>
+                            :
+                            <button type='button' onClick={() => formSubmit()}>Submit</button>
                     }
                 </div>
             </form>
@@ -322,8 +279,8 @@ function FormAndTableLocalStorage() {
                                         <td>{item.address}</td>
                                         <td>{item.course}</td>
                                         <td>
-                                            <button type="button" onClick={() => handleDeleteStudentData(index)} >Delete</button>
-                                            <button type="button" onClick={() => handleEditStudentData(item, index)}>Edit</button>
+                                            <button type="button" onClick={() => handleDeleteStudentData(item.id)} >Delete</button>
+                                            <button type="button" onClick={() => handleEditStudentData(item)}>Edit</button>
                                         </td>
 
                                     </tr>
@@ -337,4 +294,4 @@ function FormAndTableLocalStorage() {
         </div>
     )
 }
-export default FormAndTableLocalStorage
+export default FormAndTableAPI

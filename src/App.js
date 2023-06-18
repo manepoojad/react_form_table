@@ -7,6 +7,7 @@ import Practice from './container/Practice';
 import Routing from './container/Routing';
 import Apifetch from './container/Apifetch';
 import FormAndTableLocalStorage from './container/FormAndTableLocalStorage';
+import FormAndTableAPI from './container/FormAndTableAPI';
 
 function App() {
 
@@ -18,7 +19,8 @@ function App() {
 
             {/* <Apifetch/> */}
             {/* <FormAndTable/> */}
-            <FormAndTableLocalStorage/>
+            {/* <FormAndTableLocalStorage/> */}
+            <FormAndTableAPI/>
         </div>
 
 
