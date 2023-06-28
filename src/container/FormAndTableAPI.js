@@ -6,7 +6,7 @@ function FormAndTableAPI() {
     const [studentList, setStudentList] = useState([])
 
     const [formData, setFormData] = useState({
-        firstName: "Pooja",
+        firstName: "",
         lastName: "",
         dateOfBirth: "",
         gender: "",
