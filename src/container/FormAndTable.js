@@ -224,7 +224,8 @@ function FormAndTable() {
                     <select
                         name="course"
                         value={formData.course}
-                        onChange={e => handleInputChange(e)}>
+                        onChange={e => handleInputChange(e)}
+                    >
                         <option>Select</option>
                         <option>Science</option>
                         <option>Com</option>
