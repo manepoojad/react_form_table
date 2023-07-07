@@ -91,7 +91,6 @@ removeSpecificIndexItemFromArray()
 * function logic to filter number from array which is less than 20
 * const testList= [ 10, 15, 40, 8,20,35 ,45]
 */
-const filterNumberFromArray = () => {
     const filterNumberFromArray = () => {
         const testList = [10, 15, 40, 8, 45, null]
         const lessThanTwenty = testList.filter((number) => {
@@ -108,7 +107,7 @@ const filterNumberFromArray = () => {
         console.log(lessThanTwenty)
 
     }
-}
+
 
 filterNumberFromArray()
 
@@ -672,6 +671,24 @@ console.log(gender)
 console.log(langauges)
 console.log(course)
 
+const handleSubmit = () => {
+    const user = {
+        firstName: firstName,
+        lastName: lastName,
+        gender: gender,
+        langauges: langauges,
+        course: course
+    }
+    console.log(user)
+
+    //reset form
+    setFirstName('')
+    setLastName('')
+    setGender('')
+    setLangauges('')
+    setCourse('')
+}
+
 return (
     <div>
         <form>
@@ -683,6 +700,7 @@ return (
                     value={firstName}
                     placeholder='Enter your First Name'
                     onChange={e => handleInputChange(e)}
+                // onChange={e => setFirstName(e.target.value)}
                 />
             </div>
             <div>
@@ -754,7 +772,7 @@ return (
                 </select>
             </div>
             <div>
-                {/* <button type='button' onClick={()=>handleSubmit()}>Submit</button> */}
+                <button type='button' onClick={() => handleSubmit()}>Submit</button>
             </div>
         </form>
     </div>

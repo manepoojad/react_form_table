@@ -138,7 +138,13 @@
  * Q1. find prime number from list 
  * Q2. find the largest and smallest number
  * Q3. add '99' at location 4 & remove element at location 5 (location means index)
- */
+ * Q4. make Array which has duplicate element
+ * Q5. sort array with acending order(using sort)
+ * Q6. sort array with decending order(using sort)
+ * Q6. sort array with acending order(using forloop)
+ * Q7. sort array with decending order(using forloop)
+*/
+
 
 //19
 /**
