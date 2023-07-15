@@ -20,7 +20,7 @@ console.log(fullname)
 * replace "test" with "Bharat"
 * replace "is" with "Pooja" 
 */
-const raplaceSubstringFromString = () => {
+const replaceSubstringFromString = () => {
     const testString = "This is test string from test language. test word is important"
     let result = testString.replaceAll("test", "Bharat")
     // let result=testString.replace("test","Bharat")
@@ -29,7 +29,7 @@ const raplaceSubstringFromString = () => {
     console.log(result1)
 }
 
-raplaceSubstringFromString()
+replaceSubstringFromString()
 
 
 
@@ -38,7 +38,7 @@ raplaceSubstringFromString()
  *Write a function which takes parameter as a number and
   return is it even/odd number and print it
  */
-const isItoddEvenNumber = (number) => {
+const isItOddEvenNumber = (number) => {
     if (number % 2 == 0) {
         return ('Even Number')
     }
@@ -46,7 +46,7 @@ const isItoddEvenNumber = (number) => {
         return ('Odd Number')
     }
 }
-const isOddOrEven = isItoddEvenNumber(2)
+const isOddOrEven = isItOddEvenNumber(2)
 console.log(isOddOrEven)
 
 
@@ -93,8 +93,8 @@ removeSpecificIndexItemFromArray()
 */
     const filterNumberFromArray = () => {
         const testList = [10, 15, 40, 8, 45, null]
-        const lessThanTwenty = testList.filter((number) => {
-            if (number < 20) {
+        const lessThanTwenty = testList.filter((item,index) => {
+            if (item < 20) {
                 return true
             }
 
@@ -102,6 +102,7 @@ removeSpecificIndexItemFromArray()
             //     return true
 
             // }
+            
 
         })
         console.log(lessThanTwenty)
@@ -246,9 +247,9 @@ const testObject = {
     lastName: "Mane"
 }
 const getObjectKeyAndValues = () => {
-    for (let i in testObject) {
-        let text = testObject[i]
-        console.log(i)
+    for (let key in testObject) {
+        let text = testObject[key]
+        console.log(key)
         console.log(text)
     }
 

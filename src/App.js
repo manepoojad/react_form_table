@@ -19,15 +19,19 @@ import SearchFilter from './reactLogic/SearchFilter';
 import FormWithRef from './reactLogic/FormWithRef';
 import CalculatorWithRadioButton from './reactLogic/CalculatorWithRadioButton';
 import Table13Th from './reactLogic/Table13Th';
+import ObjectValueInAlert from './reactLogic/ObjectValueInAlert';
+import FormWithValidation from './reactLogic/FormWithValidation';
+import CalculatorWithSwitchCases from './reactLogic/CalculatorWithSwitchCases';
+import TableWithSearch from './reactLogic/TableWithSearch';
 function App() {
 
 
     return (
         <div className="App">
+            {/* <Apifetch/> */}
            {/* <Routing/> */}
             {/* <Practice/> */}
             {/* <StateFormAndTable/> */}
-            {/* <Apifetch/> */}
             {/* <FormAndTable/> */}
             {/* <FormAndTableLocalStorage/> */}
             {/* <FormAndTableAPI/> */}
@@ -40,7 +44,11 @@ function App() {
             {/* <SearchFilter/> */}
             {/* <FormWithRef/> */}
             {/* <CalculatorWithRadioButton/> */}
-            <Table13Th/>
+            {/* <Table13Th/> */}
+            {/* <ObjectValueInAlert/> */}
+             {/* <FormWithValidation/> */}
+             {/* <CalculatorWithSwitchCases/> */}
+             <TableWithSearch/>
             
         </div>
 

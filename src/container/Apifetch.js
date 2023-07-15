@@ -17,7 +17,7 @@ function Apifetch() {
     return (
         <div>
             <h1>API Fetch Call Page</h1>
-            <Table varient="dark" striped>
+            <Table variant="dark" striped>
                 <thead>
                     <tr>
                         <th>UserId</th>
